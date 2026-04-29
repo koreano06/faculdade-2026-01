@@ -1,0 +1,157 @@
+section .data
+    entrada1 db "Informe o primeiro valor: ", 0
+    entrada2 db "Informe o segundo valor: ", 0
+    res_soma db "Soma        : ", 0
+    res_sub db "Subtracao   : ", 0
+    res_mul db "Multiplicacao: ", 0
+    res_div db "Divisao     : ", 0
+    nova_linha db 10
+
+section .bss
+    valor1 resd 1
+    valor2 resd 1
+    buf resb 12
+    saida resb 12
+
+section .text
+global _start
+
+escrever:
+    mov eax, 4
+    mov ebx, 1
+    int 0x80
+    ret
+
+ler:
+    mov eax, 3
+    mov ebx, 0
+    int 0x80
+    ret
+
+string_para_int:
+    xor eax, eax
+    mov ecx, buf
+
+loop_int:
+    mov bl, [ecx]
+    cmp bl, 10
+    je fim_int
+    sub bl, '0'
+    imul eax, eax, 10
+    add eax, ebx
+    inc ecx
+    jmp loop_int
+
+fim_int:
+    ret
+
+int_para_string:
+    mov edi, saida + 11
+    mov byte [edi], 0
+    mov ebx, 10
+
+loop_string:
+    dec edi
+    xor edx, edx
+    div ebx
+    add dl, '0'
+    mov [edi], dl
+    test eax, eax
+    jnz loop_string
+
+    mov ecx, edi
+    mov edx, saida + 11
+    sub edx, edi
+    ret
+
+op_soma:
+    mov eax, [valor1]
+    mov ebx, [valor2]
+    add eax, ebx
+    push eax
+    ret
+
+op_sub:
+    mov eax, [valor1]
+    mov ebx, [valor2]
+    sub eax, ebx
+    push eax
+    ret
+
+op_mul:
+    mov eax, [valor1]
+    mov ebx, [valor2]
+    imul eax, ebx
+    push eax
+    ret
+
+op_div:
+    mov eax, [valor1]
+    cdq
+    mov ebx, [valor2]
+    idiv ebx
+    push eax
+    ret
+
+exibir_resultado:
+    push edx
+    push ecx
+
+    pop ecx
+    pop edx
+    call escrever
+
+    pop eax
+    call int_para_string
+    call escrever
+
+    mov ecx, nova_linha
+    mov edx, 1
+    call escrever
+    ret
+
+_start:
+    mov ecx, entrada1
+    mov edx, 26
+    call escrever
+
+    mov ecx, buf
+    mov edx, 12
+    call ler
+    call string_para_int
+    mov [valor1], eax
+
+    mov ecx, entrada2
+    mov edx, 25
+    call escrever
+
+    mov ecx, buf
+    mov edx, 12
+    call ler
+    call string_para_int
+    mov [valor2], eax
+
+    call op_div
+    call op_mul
+    call op_sub
+    call op_soma
+
+    mov ecx, res_soma
+    mov edx, 14
+    call exibir_resultado
+
+    mov ecx, res_sub
+    mov edx, 14
+    call exibir_resultado
+
+    mov ecx, res_mul
+    mov edx, 14
+    call exibir_resultado
+
+    mov ecx, res_div
+    mov edx, 14
+    call exibir_resultado
+
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80

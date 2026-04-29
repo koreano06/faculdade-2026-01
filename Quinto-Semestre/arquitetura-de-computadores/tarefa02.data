@@ -1,0 +1,151 @@
+section .data
+    entrada1    db "Informe o primeiro valor: ", 0
+    entrada2    db "Informe o segundo valor: ", 0
+    res_soma    db "Resultado da Soma: ", 0
+    res_sub     db "Resultado da Subtracao: ", 0
+    res_mul     db "Resultado da Multiplicacao: ", 0
+    res_div     db "Resultado da Divisao: ", 0
+    quebra      db 10
+
+section .bss
+    valor1      resd 1
+    valor2      resd 1
+    buf         resb 12
+    saida       resb 10
+
+section .text
+global _start
+
+escrever:
+    mov eax, 4
+    mov ebx, 1
+    int 0x80
+    ret
+
+ler:
+    mov eax, 3
+    mov ebx, 0
+    int 0x80
+    ret
+
+string_para_int:
+    xor eax, eax
+    mov ecx, buf
+.laco:
+    mov bl, [ecx]
+    cmp bl, 10
+    je .fim
+    sub bl, '0'
+    imul eax, eax, 10
+    add eax, ebx
+    inc ecx
+    jmp .laco
+.fim:
+    ret
+
+int_para_string:
+    mov esi, saida + 9
+    mov byte [esi], 0
+    mov ebx, 10
+.laco:
+    dec esi
+    xor edx, edx
+    div ebx
+    add dl, '0'
+    mov [esi], dl
+    test eax, eax
+    jnz .laco
+    mov ecx, esi
+    mov edx, saida + 9
+    sub edx, esi
+    ret
+
+_start:
+    mov ecx, entrada1
+    mov edx, 26
+    call escrever
+
+    mov ecx, buf
+    mov edx, 12
+    call ler
+    call string_para_int
+    mov [valor1], eax
+
+    mov ecx, entrada2
+    mov edx, 25
+    call escrever
+
+    mov ecx, buf
+    mov edx, 12
+    call ler
+    call string_para_int
+    mov [valor2], eax
+
+    mov eax, [valor1]
+    mov ebx, [valor2]
+    add eax, ebx
+
+    push eax
+    mov ecx, res_soma
+    mov edx, 19
+    call escrever
+    pop eax
+    call int_para_string
+    call escrever
+
+    mov ecx, quebra
+    mov edx, 1
+    call escrever
+
+    mov eax, [valor1]
+    mov ebx, [valor2]
+    sub eax, ebx
+
+    push eax
+    mov ecx, res_sub
+    mov edx, 23
+    call escrever
+    pop eax
+    call int_para_string
+    call escrever
+
+    mov ecx, quebra
+    mov edx, 1
+    call escrever
+
+    mov eax, [valor1]
+    mov ebx, [valor2]
+    imul eax, ebx
+
+    push eax
+    mov ecx, res_mul
+    mov edx, 27
+    call escrever
+    pop eax
+    call int_para_string
+    call escrever
+
+    mov ecx, quebra
+    mov edx, 1
+    call escrever
+
+    mov eax, [valor1]
+    cdq
+    mov ebx, [valor2]
+    idiv ebx
+
+    push eax
+    mov ecx, res_div
+    mov edx, 27
+    call escrever
+    pop eax
+    call int_para_string
+    call escrever
+
+    mov ecx, quebra
+    mov edx, 1
+    call escrever
+
+    mov eax, 1
+    xor ebx, ebx
+    int 0x80
