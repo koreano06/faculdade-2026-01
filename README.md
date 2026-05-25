@@ -16,7 +16,8 @@ faculdade-2026-01/
 |   |   |-- tarefa02.data
 |   |   |-- tarefa03.data
 |   |   |-- tarefa04.data
-|   |   `-- tarefa05.data
+|   |   |-- tarefa05.data
+|   |   `-- tarefa06.data
 |   `-- Estrutura-de-dados-II/
 |       |-- README.md
 |       `-- trabalho-de-estrutura-de-dados-II/
