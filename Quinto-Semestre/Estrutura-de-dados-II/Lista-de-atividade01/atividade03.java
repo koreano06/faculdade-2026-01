@@ -45,7 +45,10 @@ public class Lista_de_atividade03 {
         a2.proximo = a3;
         a3.proximo = null;
 
+<<<<<<< HEAD
         // a) Inserir 60 no final
+=======
+>>>>>>> de05821115ea84ec7cdf32694f4e4c1b53a9edb8
         Aluno novoFinal = new Aluno();
         novoFinal.matricula = 60;
         novoFinal.proximo = null;

@@ -14,7 +14,14 @@ faculdade-2026-01/
 |   |-- arquitetura-de-computadores/
 |   |   |-- tarefa01.data
 |   |   |-- tarefa02.data
+<<<<<<< HEAD
 |   |   `-- tarefa3.data
+=======
+|   |   |-- tarefa03.data
+|   |   |-- tarefa04.data
+|   |   |-- tarefa05.data
+|   |   `-- tarefa06.data
+>>>>>>> de05821115ea84ec7cdf32694f4e4c1b53a9edb8
 |   `-- Estrutura-de-dados-II/
 |       |-- README.md
 |       `-- trabalho-de-estrutura-de-dados-II/
