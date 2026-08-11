@@ -9,24 +9,33 @@ Os arquivos estao separados por semestre e por disciplina.
 ## Estrutura atual
 
 ```text
-faculdade-2026-01/
-|-- Quinto-Semestre/
-|   |-- arquitetura-de-computadores/
-|   |   |-- tarefa01.data
-|   |   |-- tarefa02.data
-<<<<<<< HEAD
-|   |   `-- tarefa3.data
-=======
-|   |   |-- tarefa03.data
-|   |   |-- tarefa04.data
-|   |   |-- tarefa05.data
-|   |   `-- tarefa06.data
->>>>>>> de05821115ea84ec7cdf32694f4e4c1b53a9edb8
-|   `-- Estrutura-de-dados-II/
-|       |-- README.md
-|       `-- trabalho-de-estrutura-de-dados-II/
-|           `-- atividade1.data
-`-- README.md
+faculdade-2026-01-master/
+├── Quinto-Semestre/
+│   ├── arquitetura-de-computadores/
+│   │   ├── tarefa01.data
+│   │   ├── tarefa02.data
+│   │   ├── tarefa3.data
+│   │   ├── tarefa03.data
+│   │   ├── tarefa04.data
+│   │   ├── tarefa05.data
+│   │   ├── tarefa06.data
+│   │   └── tarefa07.data
+│   └── Estrutura-de-dados-II/
+│       ├── Lista-de-atividade01/
+│       │   ├── atividade01.java
+│       │   ├── atividade02.java
+│       │   └── atividade03.java
+│       └── trabalho-de-estrutura-de-dados-II/
+│           ├── atividade1.java
+│           ├── atividade02.c
+│           └── atividade02.exe
+├── Sexto-Semestre/
+│   ├── Algoritimos_em_grafos/
+│   ├── PLP/
+│   └── Projeto_de_BD/
+│       └── SQL/
+├── .gitattributes
+└── README.md
 ```
 
 ## Disciplinas
