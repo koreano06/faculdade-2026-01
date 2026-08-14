@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main() {
+    
+    int matriz[i][j];
+    int i, j, contador = 1;
+    int mult[i][j];
+
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 5; j++) {
+            matriz[i][j] = contador;
+            contador++;
+        }
+    }
+    
+    for(i = 0; i < 5; i++, j = 0){
+        for(j = 0; j < 5; j++){
+            printf("%d\t", matriz [i][j]);
+        }
+        printf("\n");
+    }
+    
+    mult[i][j] = matriz [i][j] * matriz[i][j];
+    
+    printf("%d\t", mult [i][j]);
+    
+    return 0;
+}
